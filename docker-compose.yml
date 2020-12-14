@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    environment:
+      TZ: "Asia/Taipei"
+    ports:
+      - "3000:3000"
+    volumes:
+      - /Users/be_wang/Documents/message:/usr/src/app
+      # - /Users/stark/Desktop/probation/week11/server:/usr/src/app
+    restart: always
+    depends_on:
+      - mysql
+    container_name: message
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: message
+      TZ: "Asia/Taipei"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/be_wang/Documents/message/mysql:/var/lib/mysql
+      # - /Users/stark/Desktop/probation/week11/server/mysql:/var/lib/mysql
+    restart: always
+    container_name: mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      TZ: "Asia/Taipei"
+    ports:
+      - "8888:80"
+    restart: always
+    depends_on:
+      - mysql
+    container_name: phpmyadmin
+volumes:
+  logvolume01: {}
