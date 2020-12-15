@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /Users/be_wang/Documents/message:/usr/src/app
+      - .:/usr/src/app
       # - /Users/stark/Desktop/probation/week11/server:/usr/src/app
     restart: always
     depends_on:
@@ -25,7 +25,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /Users/be_wang/Documents/message/mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
       # - /Users/stark/Desktop/probation/week11/server/mysql:/var/lib/mysql
     restart: always
     container_name: mysql
